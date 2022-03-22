@@ -1,4 +1,4 @@
-import domain.*;
+import domain.Student;
 import org.junit.Test;
 import repository.StudentXMLRepo;
 import service.Service;
@@ -11,19 +11,19 @@ import static junit.framework.TestCase.assertNull;
 public class AddStudentJunitTest {
 
     @Test(expected = ValidationException.class)
-    public void addStudent_emptyID_Invalid_Test(){
+    public void addStudent_emptyID_Invalid_Test() {
         StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
         StudentValidator studentValidator = new StudentValidator();
-        Service studentService = new Service(studentRepo,studentValidator, null, null, null,null);
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
         Student student = new Student("", "Ana Popa", 917, "ana@yahoo.com");
         studentService.addStudent(student);
     }
 
     @Test
-    public void addStudent_minimumLengthID_Valid_Test(){
+    public void addStudent_minimumLengthID_Valid_Test() {
         StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
         StudentValidator studentValidator = new StudentValidator();
-        Service studentService = new Service(studentRepo,studentValidator, null, null, null,null);
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
         Student student = new Student("0", "Ana Popa", 917, "ana@yahoo.com");
         Student foundStudent = studentService.addStudent(student);
         assertNull(foundStudent);
@@ -31,19 +31,19 @@ public class AddStudentJunitTest {
     }
 
     @Test(expected = ValidationException.class)
-    public void addStudent_nullID_Invalid_Test(){
+    public void addStudent_nullID_Invalid_Test() {
         StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
         StudentValidator studentValidator = new StudentValidator();
-        Service studentService = new Service(studentRepo,studentValidator, null, null, null,null);
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
         Student student = new Student(null, "Ana Popa", 917, "ana@yahoo.com");
         studentService.addStudent(student);
     }
 
     @Test
-    public void addStudent_Valid_SuccessTest(){
+    public void addStudent_Valid_SuccessTest() {
         StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
         StudentValidator studentValidator = new StudentValidator();
-        Service studentService = new Service(studentRepo,studentValidator, null, null, null,null);
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
         Student student = new Student("700", "Cosmin Popa", 923, "cosmin@yahoo.com");
         Student foundStudent = studentService.addStudent(student);
         assertEquals(studentService.findStudent("700"), student);
@@ -52,10 +52,10 @@ public class AddStudentJunitTest {
     }
 
     @Test
-    public void addStudent_AlreadyExists_ReturnStudent_Test(){
+    public void addStudent_AlreadyExists_ReturnStudent_Test() {
         StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
         StudentValidator studentValidator = new StudentValidator();
-        Service studentService = new Service(studentRepo,studentValidator, null, null, null,null);
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
         Student student = new Student("700", "Cosmin Popa", 923, "cosmin@yahoo.com");
         studentService.addStudent(student);
         Student foundStudent = studentService.addStudent(student);
@@ -64,65 +64,170 @@ public class AddStudentJunitTest {
     }
 
     @Test(expected = ValidationException.class)
-    public void addStudent_emptyName_Invalid_Test(){
+    public void addStudent_emptyName_Invalid_Test() {
         StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
         StudentValidator studentValidator = new StudentValidator();
-        Service studentService = new Service(studentRepo,studentValidator, null, null, null,null);
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
         Student student = new Student("1234", "", 917, "ana@yahoo.com");
         studentService.addStudent(student);
     }
 
     @Test(expected = ValidationException.class)
-    public void addStudent_nullName_Invalid_Test(){
+    public void addStudent_nullName_Invalid_Test() {
         StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
         StudentValidator studentValidator = new StudentValidator();
-        Service studentService = new Service(studentRepo,studentValidator, null, null, null,null);
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
         Student student = new Student("1234", null, 917, "ana@yahoo.com");
         studentService.addStudent(student);
     }
 
     @Test(expected = ValidationException.class)
-    public void addStudent_RegExNameLengthOne_Invalid_Test(){
+    public void addStudent_nullEmail_Invalid_Test() {
         StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
         StudentValidator studentValidator = new StudentValidator();
-        Service studentService = new Service(studentRepo,studentValidator, null, null, null,null);
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
+        Student student = new Student("1234", "Sustic Alessandro", 917, null);
+        studentService.addStudent(student);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void addStudent_emptyEmail_Invalid_Test() {
+        StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
+        StudentValidator studentValidator = new StudentValidator();
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
+        Student student = new Student("1234", "Sustic Alessandro", 917, "");
+        studentService.addStudent(student);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void addStudent_RegexEmail_Invalid_Test() {
+        StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
+        StudentValidator studentValidator = new StudentValidator();
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
+        Student student = new Student("1234", "Sustic Alessandro", 917, "taie");
+        studentService.addStudent(student);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void addStudent_NegativeGroup_Invalid_Test() {
+        StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
+        StudentValidator studentValidator = new StudentValidator();
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
+        Student student = new Student("1234", "Sustic Alessandro", -1, "alex@yahoo.com");
+        studentService.addStudent(student);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void addStudent_RegExNameLengthOne_Invalid_Test() {
+        StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
+        StudentValidator studentValidator = new StudentValidator();
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
         Student student = new Student("1234", "Alessandro", 917, "ana@yahoo.com");
         studentService.addStudent(student);
     }
 
     @Test(expected = ValidationException.class)
-    public void addStudent_RegExNameHyphenLengthOne_Invalid_Test(){
+    public void addStudent_RegExNameHyphenLengthOne_Invalid_Test() {
         StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
         StudentValidator studentValidator = new StudentValidator();
-        Service studentService = new Service(studentRepo,studentValidator, null, null, null,null);
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
         Student student = new Student("1234", "Alessandro-Gabriel", 917, "ana@yahoo.com");
         studentService.addStudent(student);
     }
 
     @Test(expected = ValidationException.class)
-    public void addStudent_RegExNameLowercaseAfterHyphen_Invalid_Test(){
+    public void addStudent_RegExNameLowercaseAfterHyphen_Invalid_Test() {
         StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
         StudentValidator studentValidator = new StudentValidator();
-        Service studentService = new Service(studentRepo,studentValidator, null, null, null,null);
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
         Student student = new Student("1234", "Alexandra-natalia Tudorescu", 917, "ana@yahoo.com");
         studentService.addStudent(student);
     }
 
     @Test(expected = ValidationException.class)
-    public void addStudent_RegExNameLowercaseFamilyName_Invalid_Test(){
+    public void addStudent_RegExNameLowercaseFamilyName_Invalid_Test() {
         StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
         StudentValidator studentValidator = new StudentValidator();
-        Service studentService = new Service(studentRepo,studentValidator, null, null, null,null);
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
         Student student = new Student("1234", "Andreea ticala", 917, "ana@yahoo.com");
         studentService.addStudent(student);
     }
 
     @Test(expected = ValidationException.class)
-    public void addStudent_RegExNameLowercaseFirstName_Invalid_Test(){
+    public void addStudent_RegExNameLowercaseFirstName_Invalid_Test() {
         StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
         StudentValidator studentValidator = new StudentValidator();
-        Service studentService = new Service(studentRepo,studentValidator, null, null, null,null);
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
         Student student = new Student("1234", "andreea Ticala", 917, "ana@yahoo.com");
+        studentService.addStudent(student);
+    }
+
+    @Test
+    public void addStudent_RegExName_Valid_Test1() {
+        StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
+        StudentValidator studentValidator = new StudentValidator();
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
+        Student student = new Student("1234", "Andreea Ticala", 917, "ana@yahoo.com");
+        Student foundStudent = studentService.addStudent(student);
+        assertEquals(studentService.findStudent("1234"), student);
+        assertNull(foundStudent);
+        studentService.deleteStudent("1234");
+    }
+
+    @Test
+    public void addStudent_RegExName_Valid_Test2() {
+        StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
+        StudentValidator studentValidator = new StudentValidator();
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
+        Student student = new Student("1234", "Alexandra-Natalia Tudorescu", 917, "ana@yahoo.com");
+        Student foundStudent = studentService.addStudent(student);
+        assertEquals(studentService.findStudent("1234"), student);
+        assertNull(foundStudent);
+        studentService.deleteStudent("1234");
+    }
+
+    @Test
+    public void addStudent_RegExName_Valid_Test3() {
+        StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
+        StudentValidator studentValidator = new StudentValidator();
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
+        Student student = new Student("1234", "Alexandra Natalia Tudorescu", 917, "ana@yahoo.com");
+        Student foundStudent = studentService.addStudent(student);
+        assertEquals(studentService.findStudent("1234"), student);
+        assertNull(foundStudent);
+        studentService.deleteStudent("1234");
+    }
+
+    @Test
+    public void addStudent_RegExName_Valid_Test4() {
+        StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
+        StudentValidator studentValidator = new StudentValidator();
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
+        Student student = new Student("1234", "Ana Maria Ioana Popescu-Matei", 917, "ana@yahoo.com");
+        Student foundStudent = studentService.addStudent(student);
+        assertEquals(studentService.findStudent("1234"), student);
+        assertNull(foundStudent);
+        studentService.deleteStudent("1234");
+    }
+
+    @Test
+    public void addStudent_RegExName_Valid_Test5() {
+        StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
+        StudentValidator studentValidator = new StudentValidator();
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
+        Student student = new Student("1234", "Ana Maria Ioana Popescu Matei", 917, "ana@yahoo.com");
+        Student foundStudent = studentService.addStudent(student);
+        assertEquals(studentService.findStudent("1234"), student);
+        assertNull(foundStudent);
+        studentService.deleteStudent("1234");
+    }
+
+    @Test(expected = ValidationException.class)
+    public void addStudent_RegExNameLength_Invalid_Test() {
+        StudentXMLRepo studentRepo = new StudentXMLRepo("src/main/resources/Studenti.xml");
+        StudentValidator studentValidator = new StudentValidator();
+        Service studentService = new Service(studentRepo, studentValidator, null, null, null, null);
+        Student student = new Student("1234", "Ana Maria Ioana Popescu Stanescu Matei", 917, "ana@yahoo.com");
         studentService.addStudent(student);
     }
 }

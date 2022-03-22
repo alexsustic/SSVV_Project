@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class StudentValidator implements Validator<Student> {
 
     void validateNameRegEx(String name){
-        Pattern namePattern = Pattern.compile("([A-Z][a-z]*(\\\\-[A-Z][a-z\\\\-]*)? ?){2,5}");
+        Pattern namePattern = Pattern.compile("^([A-Z][a-z]*(\\-[A-Z][a-z\\-]*)? ?){2,5}$");
         Matcher matcher = namePattern.matcher(name);
         boolean matchFound = matcher.find();
         if(!matchFound) {
@@ -31,11 +31,14 @@ public class StudentValidator implements Validator<Student> {
      */
     @Override
     public void validate(Student entity) throws ValidationException {
+        if(entity.getID() == null){
+            throw new ValidationException("Id incorect!");
+        }
         if(entity.getID().equals("")){
             throw new ValidationException("Id incorect!");
         }
-        if(entity.getID() == null){
-            throw new ValidationException("Id incorect!");
+        if(entity.getNume() == null){
+            throw new ValidationException("Nume incorect!");
         }
         if(entity.getNume().equals("")){
             throw new ValidationException("Nume incorect!");
@@ -45,9 +48,6 @@ public class StudentValidator implements Validator<Student> {
         }
         if(entity.getEmail() == null){
             throw new ValidationException("Email incorect!");
-        }
-        if(entity.getNume() == null){
-            throw new ValidationException("Nume incorect!");
         }
         validateNameRegEx(entity.getNume());
         if(entity.getEmail().equals("")){
