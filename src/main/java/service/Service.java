@@ -165,7 +165,7 @@ public class Service {
         Student student = studentFileRepository.findOne(nota.getIdStudent());
         Tema tema = temaFileRepository.findOne(nota.getIdTema());
         int predare = calculeazaSPredare(nota.getData());
-        if(predare != tema.getDeadline()){
+        if(predare > tema.getDeadline()){
             if (predare-tema.getDeadline() == 1){
                 nota.setNota(nota.getNota()-2.5);
             }
@@ -174,7 +174,7 @@ public class Service {
             }
         }
         notaFileRepository.save(nota);
-        String filename = "fisiere/" + student.getNume() + ".txt";
+        String filename = "src/main/resources/" + student.getNume() + ".txt";
         try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filename, true))){
             bufferedWriter.write("\nTema: " + tema.getID());
             bufferedWriter.write("\nNota: " + nota.getNota());
