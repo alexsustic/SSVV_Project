@@ -1,0 +1,54 @@
+
+Tema: 2
+Nota: 10.0
+Predata in saptamana: 1
+Deadline: 5
+Feedback: well done!
+
+Tema: 2
+Nota: 10.0
+Predata in saptamana: 3
+Deadline: 5
+Feedback: well done!
+
+Tema: 2
+Nota: 10.0
+Predata in saptamana: 3
+Deadline: 5
+Feedback: well done!
+
+Tema: 2
+Nota: 10.0
+Predata in saptamana: 0
+Deadline: 5
+Feedback: foarte fain
+
+Tema: 2
+Nota: 9.0
+Predata in saptamana: 1
+Deadline: 5
+Feedback: ok
+
+Tema: 2
+Nota: 10.0
+Predata in saptamana: 3
+Deadline: 5
+Feedback: well done!
+
+Tema: 2
+Nota: 10.0
+Predata in saptamana: 3
+Deadline: 5
+Feedback: well done!
+
+Tema: 2
+Nota: 10.0
+Predata in saptamana: 3
+Deadline: 5
+Feedback: well done!
+
+Tema: 2
+Nota: 10.0
+Predata in saptamana: 3
+Deadline: 5
+Feedback: well done!

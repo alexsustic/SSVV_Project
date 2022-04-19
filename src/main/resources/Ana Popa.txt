@@ -1,0 +1,36 @@
+
+Tema: 1
+Nota: 10.0
+Predata in saptamana: 1
+Deadline: 10
+Feedback: well done!
+
+Tema: 1
+Nota: 10.0
+Predata in saptamana: 3
+Deadline: 10
+Feedback: well done!
+
+Tema: 1
+Nota: 10.0
+Predata in saptamana: 3
+Deadline: 10
+Feedback: well done!
+
+Tema: 01
+Nota: 10.0
+Predata in saptamana: 3
+Deadline: 10
+Feedback: well done!
+
+Tema: 01
+Nota: 10.0
+Predata in saptamana: 3
+Deadline: 10
+Feedback: well done!
+
+Tema: 01
+Nota: 10.0
+Predata in saptamana: 3
+Deadline: 10
+Feedback: well done!
